@@ -4,6 +4,6 @@
 !example-instructor.html
 *.pdf
 *_files/
-!example_files/*
+!example_files/
 /.luarc.json
 /.quarto/
