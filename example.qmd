@@ -1,0 +1,136 @@
+---
+title: "Password-Protected Content Example"
+include-solutions: false
+format: html
+filters:
+  - password-content
+---
+
+# Password-Protected Content Extension Demo
+
+This document demonstrates the password-protected content extension.
+
+## Example 1: Simple Solution
+
+**Exercise:** Write a Python function that adds two numbers.
+
+Try to solve this yourself first!
+
+:::{.content-password name="add-function"}
+## Solution
+
+```python
+def add_numbers(a, b):
+    """Add two numbers and return the result."""
+    return a + b
+
+# Test the function
+result = add_numbers(5, 3)
+print(f"5 + 3 = {result}")
+```
+
+**Explanation:** This is a simple function that takes two parameters and returns their sum.
+:::
+
+## Example 2: Complex Solution with Multiple Blocks
+
+**Exercise:** Create a sklearn pipeline for data processing.
+
+:::{.content-password name="sklearn-pipeline"}
+## Solution: Data Processing Pipeline
+
+First, let's import the necessary libraries:
+
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+```
+
+Now create the pipeline:
+
+```python
+# Create pipeline
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', LogisticRegression(max_iter=1000, random_state=42))
+])
+
+# Train
+pipeline.fit(X_train, y_train)
+
+# Evaluate
+train_acc = pipeline.score(X_train, y_train)
+test_acc = pipeline.score(X_test, y_test)
+
+print(f"Train Accuracy: {train_acc:.3f}")
+print(f"Test Accuracy: {test_acc:.3f}")
+```
+
+**Key Points:**
+- Pipeline ensures proper data flow
+- Scaler fits only on training data
+- Single object for prediction
+:::
+
+## Example 3: Short Solution
+
+**Exercise:** What is the capital of France?
+
+:::{.content-password name="france-capital"}
+**Answer:** Paris
+:::
+
+## How to Use
+
+### Creating Password-Protected Content
+
+Wrap your solution in a div with the `content-password` class and a unique `name` attribute:
+
+```markdown
+:::{.content-password name="my-solution"}
+Your solution content here...
+:::
+```
+
+The `name` attribute:
+- Determines the password (same name = same password)
+- Keeps password stable even if content changes
+- Should be unique and descriptive (e.g., "exercise-1", "sklearn-pipeline")
+- If omitted, defaults to "solution-1", "solution-2", etc.
+
+### For Students (include-solutions: false)
+
+1. Try to solve the exercise yourself
+2. When instructor shares the password, enter it in the password field
+3. Click "Unlock" or press Enter
+4. Solution will be revealed and remain visible during your session
+
+### For Instructors (include-solutions: true)
+
+1. Render with `include-solutions: true` in YAML
+2. Collapsible blue boxes will show passwords for each solution (click to reveal)
+3. The solution name is displayed in the header
+4. Share passwords with students progressively during class
+5. Students can unlock solutions at their own pace
+
+## Security
+
+**Password Protection:** Passwords are NOT stored in the HTML source code. Only a one-way hash is included, making it impossible to extract the password by viewing the page source. The content is encrypted with the password, and can only be decrypted by entering the correct password.
+
+## Testing
+
+To test this example:
+
+**Student view:**
+```bash
+quarto render example.qmd
+```
+
+**Instructor view:**
+```bash
+quarto render example.qmd -M include-solutions:true
+```
+
+Or change the YAML front matter `include-solutions: false` to `include-solutions: true`.
