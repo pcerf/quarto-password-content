@@ -2,6 +2,15 @@
 
 A Quarto extension that allows you to password-protect content in HTML documents, perfect for progressively revealing solutions during lectures or workshops. The encryption is not secure and hence suitable for educational use only, not sensitive data.
 
+## Example
+
+Here is the source code for a minimal example: [example.qmd](example.qmd).
+
+**See it in action:**
+
+- [Student view](https://pcerf.github.io/quarto-password-content/example.html) - Solutions are password-protected
+- [Instructor view](https://pcerf.github.io/quarto-password-content/example-instructor.html) - Shows passwords for each solution
+
 ## Installation
 
 ```bash
@@ -9,8 +18,6 @@ quarto add pcerf/quarto-password-content
 ```
 
 This will install the extension under the `_extensions` subdirectory.
-
-If you're using version control, you will want to check in this directory.
 
 ## Usage
 
@@ -92,15 +99,6 @@ This solution demonstrates...
 3. **Share passwords**: As you progress, share passwords verbally or via chat
 
 4. **Students unlock**: Students enter passwords to reveal solutions at their own pace
-
-## Example
-
-Here is the source code for a minimal example: [example.qmd](example.qmd).
-
-**See it in action:**
-
-- [Student view](https://pcerf.github.io/quarto-password-content/example.html) - Solutions are password-protected
-- [Instructor view](https://pcerf.github.io/quarto-password-content/example-instructor.html) - Shows passwords for each solution
 
 ## Use Cases
 
