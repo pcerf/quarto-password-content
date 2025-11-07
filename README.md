@@ -99,8 +99,8 @@ Here is the source code for a minimal example: [example.qmd](example.qmd).
 
 **See it in action:**
 
-- [Student view](https://htmlpreview.github.io/?https://github.com/pcerf/quarto-password-content/blob/main/example.html) - Solutions are password-protected
-- [Instructor view](https://htmlpreview.github.io/?https://github.com/pcerf/quarto-password-content/blob/main/example-instructor.html) - Shows passwords for each solution
+- [Student view](https://pcerf.github.io/quarto-password-content/example.html) - Solutions are password-protected
+- [Instructor view](https://pcerf.github.io/quarto-password-content/example-instructor.html) - Shows passwords for each solution
 
 ## Use Cases
 
