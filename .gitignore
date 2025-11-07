@@ -1,5 +1,7 @@
 .DS_Store
 *.html
+!example.html
+!example-instructor.html
 *.pdf
 *_files/
 /.luarc.json

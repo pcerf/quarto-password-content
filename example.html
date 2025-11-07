@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Password-Protected Content Example</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="example_files/libs/clipboard/clipboard.min.js"></script>
+<script src="example_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="example_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="example_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="example_files/libs/quarto-html/popper.min.js"></script>
+<script src="example_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="example_files/libs/quarto-html/anchor.min.js"></script>
+<link href="example_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="example_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="example_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="example_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="example_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Password-Protected Content Example</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="password-protected-content-extension-demo" class="level1">
+<h1>Password-Protected Content Extension Demo</h1>
+<p>This document demonstrates the password-protected content extension.</p>
+<section id="example-1-simple-solution" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-simple-solution">Example 1: Simple Solution</h2>
+<p><strong>Exercise:</strong> Write a Python function that adds two numbers.</p>
+<p>Try to solve this yourself first!</p>
+<div class="password-protected-container" id="password-content-1">
+  <div class="password-prompt">
+    <div class="password-box">
+      <h4 class="anchored">🔒 Solution Locked</h4>
+      <div class="password-input-group">
+        <input type="text" id="password-content-1-input" class="password-input" placeholder="Enter 5-character password" maxlength="5" style="text-transform: uppercase;">
+        <button onclick="unlockContent_1()" class="password-submit">Unlock</button>
+      </div>
+      <div id="password-content-1-error" class="password-error" style="display: none;">
+        ❌ Incorrect password. Please try again.
+      </div>
+    </div>
+  </div>
+  <div id="password-content-1-content" class="password-protected-content" style="display: none;">
+    <!-- Content will be decrypted and inserted here -->
+  </div>
+</div>
+
+<script>
+(function() {
+  const encryptedData_1 = '6001135c736000605d25600114117377413f5834315b3f5a647700750704165d3c41352c5d3e1172061762722977176371647573750702215b26117375513c553236176370647700235b34375135772e21577506736000605d256001141173775132056477007507046001134433201760752229532347647676750673365d25462220713f50246000604438315a3f5a647700750704600113572e2157750671265e314732600114117377413f41332657135b2520176204313c46385b2f6000621172001763773235533e1173755b341172011762062227037d056477007507046001135564770238462423176370647700750672265061197060006211737553225d20685a395025205c750705600062403330577506736000604020275b3e50243d1763706477007d05647700750704600113117303537507046001134731245c750671265e31473260011411737759271173771763712520547507026000164731245c7507046000605525216d3e412c2757224764770a31117306176204236000691172041763776477742344202b1763716475737507023642315a64770239506476767506732650611973600062117200176377206000605c3320547507056000621173765132056c77176206647702314628241f385d2521573e11720117620635374735117377176204352450395a25204a7507056000621970600062117200176377647774311172001762046477027506716000601172064120552f600060572d244123117201176206222a17620664767775067734473f4064767075067734473f4064767075067734473f4064767011502560006040362a1762042f305f32513336176204202b5675067137572441332b176204352d57750671375723412d311c75067734473f4064767075067734473f4064767075067734473f406476707507026000164731245c7507046001131173034120552f6001151171041763773235533e1173755b341172011762062227037d076477007507046001135564770238462423176370647700750672265061197260006211737553225d20685a395025205c750705600062403330577506736000604020275b3e50243d1763706477007d05647700750704600113117303537507046000601173751762046477027507023642315a6477023358203641750705600062572760006211720040354034375c7507026000164731245c750704600060556477027507023642315a64770233582036417507056000625b316000621172001762766476717506073642315a647677750671271763776477742344202b1763716475737507023642315a64770239506476767506732650611975600062117200176377206000605c3320547507056000621173765132056c71176206647702314628241f385d2521573e11720117620635374735117377176204352450395a25204a7507056000621970600062117200176377647774311172001763776477742344202b1763716475737507023642315a64770239506476767506732650611974600062117200176377206000605c3320547507056000621173765132056c70176206647702314628241f385d2521573e11720117620635374735117377176204352450395a25204a7507056000621970600062117200176377647774311172001763773235533e117375513c553236176370647700335b6477007507046000631173756635473560006040292017620427305c3340282a5c7507026000164731245c7507046001131173034120552f6001151171041763773235533e1173755b341172011762062227037d026477007507046001135564770238462423176370647700750672265061197760006211737553225d20685a395025205c750705600062403330577506736000604020275b3e50243d1763706477007d0564770075070460011311730353750704375723412d311762046476712344202b17620422295323476476767506732a427506736001151172011763776477742344202b1763716477023150251a5c25592320402311737d1763773235533e117375513c5532361763706477003442647700750704701763776477742344202b1763716477717506716001134731245c750671265e3147326001141173775626117377176371726001131173034120552f60011511737c1763776477742344202b1763716475737507023642315a64770239506476767506732650611976600062117200176377206000605c3320547507056000621173765132056c72176206647702314628241f385d2521573e11720117620635374735117377176204352450395a25204a7507056000621970600062117200176377647774311172001763773235533e117375513c55323617637064770032416477007507043540395a356001131173034120552f60011511737d1763773235533e117375513c55323617637064770023476477007507042317620230305d2411720707750671600012117375017506716001141173751763776477742344202b1763716476712344202b176204222953234764767675067336517506736001151176071763776477742344202b1763713320412558356001134731245c750671265e31473260011411737741331173771763716472767507026000164731245c7507046001134731245c750671265e314732600114117377412311737717637164770421412e311763766476717506073642315a6476777506786001131173034120552f600115117206176272222a5635117200176377647774204624600115117206176272252c44750704600211117206427507046001134735375d3e53647677154c3129533e55352c5d3e1172041763776477742340332a5c37117200176204152d5b231173755b2311737553750671365b3d442d2017620427305c3340282a5c750671315a314064770224552a204175040031453f11737542314620285724513336176204202b5675067137572441332b41750671315a355d336000604734281c75070260001644647677';
+  const passwordHash_1 = 'cfc6121';
+  
+  function hashPassword(password) {
+    let hash = 5381;
+    for (let i = 0; i < password.length; i++) {
+      hash = ((hash * 33) + password.charCodeAt(i)) >>> 0;
+    }
+    return hash.toString(16);
+  }
+  
+  function xorDecrypt(hexStr, password) {
+    let decrypted = '';
+    const keyLen = password.length;
+    
+    for (let i = 0; i < hexStr.length; i += 2) {
+      const charCode = parseInt(hexStr.substr(i, 2), 16);
+      const keyCode = password.charCodeAt((i / 2) % keyLen);
+      decrypted += String.fromCharCode(charCode ^ keyCode);
+    }
+    
+    // URL decode to restore UTF-8 characters
+    return decodeURIComponent(decrypted);
+  }
+  
+  window.unlockContent_1 = function() {
+    const input = document.getElementById('password-content-1-input');
+    const password = input.value.toUpperCase().trim();
+    const errorDiv = document.getElementById('password-content-1-error');
+    
+    if (hashPassword(password) === passwordHash_1) {
+      // Decrypt and show content
+      const decrypted = xorDecrypt(encryptedData_1, password);
+      document.getElementById('password-content-1-content').innerHTML = decrypted;
+      document.getElementById('password-content-1-content').style.display = 'block';
+      document.querySelector('#password-content-1 .password-prompt').style.display = 'none';
+      errorDiv.style.display = 'none';
+      
+      // Store password for this session
+      sessionStorage.setItem('password-content-1-password', password);
+    } else {
+      errorDiv.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  };
+  
+  // Check if already unlocked in this session
+  const savedPassword = sessionStorage.getItem('password-content-1-password');
+  if (savedPassword && hashPassword(savedPassword) === passwordHash_1) {
+    const decrypted = xorDecrypt(encryptedData_1, savedPassword);
+    document.getElementById('password-content-1-content').innerHTML = decrypted;
+    document.getElementById('password-content-1-content').style.display = 'block';
+    document.querySelector('#password-content-1 .password-prompt').style.display = 'none';
+  }
+  
+  // Allow Enter key to submit
+  document.getElementById('password-content-1-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      unlockContent_1();
+    }
+  });
+})();
+</script>
+
+<style>
+.password-protected-container {
+  margin: 1.5em 0;
+}
+
+.password-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.password-box {
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 2em;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.password-box h4 {
+  margin-top: 0;
+  color: #495057;
+}
+
+.password-box p {
+  color: #6c757d;
+  margin-bottom: 1.5em;
+}
+
+.password-input-group {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.password-input {
+  flex: 1;
+  padding: 0.75em;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-family: monospace;
+  text-align: center;
+  letter-spacing: normal;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.password-submit {
+  padding: 0.75em 1.5em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.password-submit:hover {
+  background-color: #0056b3;
+}
+
+.password-submit:active {
+  background-color: #004085;
+}
+
+.password-error {
+  color: #dc3545;
+  font-weight: 600;
+  margin-top: 0.5em;
+}
+
+.password-protected-content {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+
+</section>
+<section id="example-2-complex-solution-with-multiple-blocks" class="level2">
+<h2 class="anchored" data-anchor-id="example-2-complex-solution-with-multiple-blocks">Example 2: Complex Solution with Multiple Blocks</h2>
+<p><strong>Exercise:</strong> Create a sklearn pipeline for data processing.</p>
+<div class="password-protected-container" id="password-content-2">
+  <div class="password-prompt">
+    <div class="password-box">
+      <h4 class="anchored">🔒 Solution Locked</h4>
+      <div class="password-input-group">
+        <input type="text" id="password-content-2-input" class="password-input" placeholder="Enter 5-character password" maxlength="5" style="text-transform: uppercase;">
+        <button onclick="unlockContent_2()" class="password-submit">Unlock</button>
+      </div>
+      <div id="password-content-2-error" class="password-error" style="display: none;">
+        ❌ Incorrect password. Please try again.
+      </div>
+    </div>
+  </div>
+  <div id="password-content-2-content" class="password-protected-content" style="display: none;">
+    <!-- Content will be decrypted and inserted here -->
+  </div>
+</div>
+
+<script>
+(function() {
+  const encryptedData_2 = '6178143a736179673b2561781377737638383e343022383c6c202a23336c343938312437383e3c26693b3e22242822393764767972610417243b27352d24397772056e656205253f367773741b253d222138243b2f236e6713112d3b323e282a2e7261026179113a736178127771056e64113161781214283638237773076e65622d213f72177361736777787d387260712d26273d33306e6562352c2e7260712a2e343732372a252b64767b3b3b23362a253b24376e6413647708726007346e641764740a726102202221777374283b3332376e6416647679243d34362832112e202e7260736179673b256178137773762835636476797261046178142233216e671322282a242164770f7260733724222022210838362461796722383023383c647679726104617814312e202e726071272736213261781377737638382733272e143d25216e6562313d3f3f3d2f6179657772016e641132342a3977737422337772006e656022267a7a636476797261046178143364767b3f2024226e64166476797260722729667f706179657773742a253b2069233e362521257261056179652633312e726073617967262026223936243c6e64166476797a636476797261046178147773022a726104617814213125257260712727362132617813777376223a7773766e64172736243a7772076e651432342a397772016e6562322f273233332a65273b3121273e3c246179677772073827332f617967312d2538247772006e656028296e656064770e3e3f312b39237772076e651432342a397772016e6562112d3b323e282a2e72610261791121312525726104617b167772073827332f6179673b256178137773762835636c766e656064770e726102256e656229362e317772006e6560647678343070697972607361796733332d2a7a3a28202f323c64770f72607330392237647679726071302a353b2f202e2f7772006e65606c756e656064770e7261026179113364770e726102373b363c64767b343e2037387261056179653b2c6179657772012d253d2c6178147773023827332f617812777374383c3e242539397c31362e27202e272e2421282a2c726071617814213125257260712727362132617813777376223a7773766e641728293b3820356178147773023827332f6178127773741823332f202a253612272a3b37336178147773023827332f6178127771056e641132342a3977737422337772006e656022267a7a616476797261046178143364767b3f2024226e64166476797260722729667f726179657773742a253b2069233e362521257261056179652633312e726073617967262026223936243c6e64166476797a636476797261046178147773022a726104617814213125257260712727362132617813777376223a7773766e64172736243a7772076e651432342a397772016e6562322f273233332a653b3b2f212a250d2c2b2f323e64767b726102373b363c64767b343e2037387261056179653b2c617965777201223a222e363f726102617911213125257261046179671e2e232224262827193235332138243b2e2a6e641164760d2422202a6e641764740a726102373b363c64767b3e3664770f7260732729667f756179657772016e6411206179673a33212d7261056179657773772835636c706e656064767b36202825663f3b25202e397772006e656035363e327773766e65623525293e3c2521337261056179657f706179657772016e641164760d367772016e641132342a39777374283b3332376e64166476793e3f6476797261042239383f647708726007373b363c64770e72607137203b37203625793f2e202e3b0d3221273231352d24397773746e641132342a39777374283b3332376e64166476793e3f6476797261042d26273d33306e641164760d2422202a6e641764767b2320202d25082624373f0821312822237772076e651432342a397772016e641164760d343d25216e64176477087260073439327772016e641164760d333b376178127771056e6411316178121c2e336e656222362e3626246179672629216e6562312d3b323e282a2e7261006178147773023b726104617b167772072f3e2464767b343e203738726105617965212e31393437022b2f327773766e656228206e64166476793430736179657772016e641131362e726200272736213261781377737638382733272e143d25216e6562313d3f3f3d2f6179657772016e6411222b2f32777374283b3332376e6416647679243d34362832112e202e7260713432233a2e2a6e656064770e726102373b363c64767b3e3664770f7260732729657f706179657772016e6411206179673a33212d7261056179657773772835606c756e656064767b36202825663f3b25202e397772006e656035363e327773766e65623525293e3c2521337261056179657f706179657772016e641164760d367772016e641132342a39777374283b3332376e6416647679343d64767972610461796477737408253720302e726071342227372d2d25327772076e651432342a397772016e641164760d2422202a6e641764740a726102373b363c64767b3e3664770f7260732729657f736179657772016e6411206179673a33212d7261056179657773772835606c766e656064767b36202825663f3b25202e397772006e656035363e327773766e65623525293e3c2521337261056179657f706179657772016e641164760d367772013b3e22242822393764767b726102373b363c64767b343e2037387261056179653d316179657772016e6416647708726007373b363c64770e726071142227372d2d253277737c6e6210647708726007373b363c64770e726200617814213125257260712d2f72610561796531237666647773766e641764770836777374232537276178137773766e65612226797a6164767972607125393e336c2c223336242a6e6416647679232034216e656064767b2333232d2533373961781377737666667773766e6417647708726007256e641764767b7260716179677773746e656a6477082422202a6e656222282a242164770f726073373f7260736178127773726e6561727d6e641032272a3b3733617961777377786e7772066e641164760d2422202a6e6417647608726071173f363c2525393301222527322064767372607861796e7773076e641164760d2422202a6e641764740a726102373b363c64767b3e3664770f7260732729657f756179657772016e6411206179673a33212d7261056179657773772835606c706e656064767b36202825663f3b25202e397772006e656035363e327773766e65623525293e3c2521337261056179657f706179657772016e641164760d367772016e656264767b72607161796777737c6e641132342a39777374283b3332376e64166476792426647679726104617961777377786e777206283b33323722313b24366e6564647678646b6477097261026179112131252572610461791477737407383528373f3e3113212c2537323722383c6476733a33391b2223373361781421312525726071272736213261781377737624277773766e641764770f726102617911213125257261046178142131252572607127273621326178137773762f217773766e641770747b677772076e651432342a397772016e651164767b25332f20243a0d32302a23376477082422202a6e656222282a242164770f7260732b3b7260736178127772006e641164760d2422202a6e64176477082422202a6e656222282a242164770f726073203d72607361781266736178147773023827332f61781277737d6e656b647708726007373b363c64770e726200617814213125257260712d2f72610561796531237666627773766e641764770836777374232537276178137773766e65612226797a6764767972607125393e336c2c223336242a6e6416647679232034216e656064767b2333232d2533373961781377737666667773766e6417647708726007256e641764710f7260786178147773023827332f6178127771056e641132342a3977737422337772006e65602226797a646476797261046178143364767b3f2024226e64166476797260722729657f776179657773742a253b2069233e362521257261056179652633312e726073617967262026223936243c6e64166476797a636476797261046178147773022a7261046178147773023827332f6178127771056e641132342a3977737422337772006e65602226797a656476797261046178143364767b3f2024226e64166476797260722729657f766179657773742a253b2069233e362521257261056179652633312e726073617967262026223936243c6e64166476797a636476797261046178147773022a72610461781421312525726071272736213261781377737628387773766e64176476787260711039363b2f6178147773023827332f6178127772076e651432342a397772016e67136477082422202a6e656228206e641664767934307369737260736178127772072a7260712c39323464770f726073617964312376666f7773766e6562203622367f292d2f33372f6178137773763f2527246179657773743f3630282a2f322a64770f726073697a7260736178127772076e6514206178122228342e3b3b2f2165313b3561796f0a1e3039363b2f6179147773743208263325223977737d6e641164760d2422202a6e641764740a726102373b363c64767b3e3664770f7260732729657f786179657772016e6411206179673a33212d7261056179657773772835606c7d6e656064767b36202825663f3b25202e397772006e656035363e327773766e65623525293e3c2521337261056179657f706179657772016e641164760d367772016e641164760d2422202a6e641764740a726102373b363c64767b3e3664770f7260732729657f70746e656064770e726102256e656229362e317772006e6560647678343073697a677773766e6562203622367f292d2f33372f6178137773763f2527246179657773743f3630282a2f322a64770f726073697a7260736178127772076e6514206178127772073827332f617967312d2538247772006e6560222b6e656064770e72607261796717372527223335216e641164760d2422202a6e6417647708726007373b363c64770e726200617814213125257260712d2f7261056179653123766666636476797261046178143364767b3f2024226e64166476797260722729657f70756e656064767b36202825663f3b25202e397772006e656035363e327773766e65623525293e3c2521337261056179657f706179657772016e641164760d367772013f2533282a143631226179677772073827332f617967312d2538247772006e65602e346e656064770e7261056178147773023827332f6178127773743b3e2224282239376f372838202461796f0a1e3039363b2f6179147773743208263325223977737d6e641164760d2422202a6e641764740a726102373b363c64767b3e3664770f7260732729657f70766e656064770e726102256e656229362e317772006e6560647678343073697a657773766e6562203622367f292d2f33372f6178137773763f2527246179657773743f3630282a2f322a64770f726073697a7260736178127772076e6514206178122624373f083322276e65626477082422202a6e656222282a242164770f7260732b3b7260736178127772006e641164760d2422202a6e641764767b273b3121273e3c246a38343d33216e656a191b3f32213561791477737432082624373f7260786178147773023827332f6178127771056e641132342a3977737422337772006e65602226797a63726179657772016e6411206179673a33212d7261056179657773772835606c757872607361796733332d2a7a3a28202f323c64770f72607330392237647679726071302a353b2f202e2f7772006e65606c756e656064770e7261026179113364770e72610261791121312525726104617b167772073827332f6179673b256178137773762835606c757f7260736178127772072a7260712c39323464770f72607361796431237666666664767972607125393e336c2c223336242a6e6416647679232034216e656064767b2333232d2533373961781377737666667773766e6417647708726007256e64176477082422202a6e656222282a242164770f726073263e72607361781222332d25237772076e651432342a397772016e656a6477082422202a6e656222282a242164770f72607337387260736178123464767d26272e306e641015362a3e3c64767b16312231393631386178167773746e641164760d2422202a6e64176477082422202a6e656222282a242164770f72607337287260736178127776066e641164760d2422202a6e641735362a3e3c1e2528347772073827332f617967312d2538247772006e656032276e656064770e7261006a78317776006e641164760d2422202a6e64176477082422202a6e656222282a242164770f72607337387260736178127773723a223d356178157772076e651432342a397772016e656b647708726007373b363c64770e726200617814213125257260712d2f7261056179653123766666676476797261046178143364767b3f2024226e64166476797260722729657f70716e656064767b36202825663f3b25202e397772006e656035363e327773766e65623525293e3c2521337261056179657f706179657772016e641164760d367772016e641132342a39777374283b3332376e6416647679352764767972610434393e3c356178147773023827332f61781277737c6e641132342a39777374283b3332376e64166476792421647679726104226e6564303124237772061f3221356179671322273e2533223d6e641364767b7261026179112131252572610461781421312525726071272736213261781377737638347773766e641764730972610261791121312525726104302e24261e2528347772073827332f617967312d2538247772006e656032276e656064770e7261006a78317776006e641164760d2422202a6e64176477082422202a6e656222282a242164770f72607337387260736178127773723a223d356178157772076e651432342a397772016e656b647708726007373b363c64770e726102617911312e202e7261046178147773023b253764770e7261026179113628326e641764740a726102346e64176477082426332b253077720100322b64767b073d282a3f247772056e641164760d2426332b25307772016e65626c6179670228342e3b3b2f216e6562242a38222024376e65623136242737336179673620302a7260712227382564767b7a7771051834332d21397260712222232164767b383c2d3d6e65622e2a6e656235362a3e3c282a2c726071202a233364767b7a777374183e3c26282e7260712b293d3722306e6562272b397260713439323628273f3e3d2f6178147773023b726104';
+  const passwordHash_2 = 'cf81fbe';
+  
+  function hashPassword(password) {
+    let hash = 5381;
+    for (let i = 0; i < password.length; i++) {
+      hash = ((hash * 33) + password.charCodeAt(i)) >>> 0;
+    }
+    return hash.toString(16);
+  }
+  
+  function xorDecrypt(hexStr, password) {
+    let decrypted = '';
+    const keyLen = password.length;
+    
+    for (let i = 0; i < hexStr.length; i += 2) {
+      const charCode = parseInt(hexStr.substr(i, 2), 16);
+      const keyCode = password.charCodeAt((i / 2) % keyLen);
+      decrypted += String.fromCharCode(charCode ^ keyCode);
+    }
+    
+    // URL decode to restore UTF-8 characters
+    return decodeURIComponent(decrypted);
+  }
+  
+  window.unlockContent_2 = function() {
+    const input = document.getElementById('password-content-2-input');
+    const password = input.value.toUpperCase().trim();
+    const errorDiv = document.getElementById('password-content-2-error');
+    
+    if (hashPassword(password) === passwordHash_2) {
+      // Decrypt and show content
+      const decrypted = xorDecrypt(encryptedData_2, password);
+      document.getElementById('password-content-2-content').innerHTML = decrypted;
+      document.getElementById('password-content-2-content').style.display = 'block';
+      document.querySelector('#password-content-2 .password-prompt').style.display = 'none';
+      errorDiv.style.display = 'none';
+      
+      // Store password for this session
+      sessionStorage.setItem('password-content-2-password', password);
+    } else {
+      errorDiv.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  };
+  
+  // Check if already unlocked in this session
+  const savedPassword = sessionStorage.getItem('password-content-2-password');
+  if (savedPassword && hashPassword(savedPassword) === passwordHash_2) {
+    const decrypted = xorDecrypt(encryptedData_2, savedPassword);
+    document.getElementById('password-content-2-content').innerHTML = decrypted;
+    document.getElementById('password-content-2-content').style.display = 'block';
+    document.querySelector('#password-content-2 .password-prompt').style.display = 'none';
+  }
+  
+  // Allow Enter key to submit
+  document.getElementById('password-content-2-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      unlockContent_2();
+    }
+  });
+})();
+</script>
+
+<style>
+.password-protected-container {
+  margin: 1.5em 0;
+}
+
+.password-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.password-box {
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 2em;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.password-box h4 {
+  margin-top: 0;
+  color: #495057;
+}
+
+.password-box p {
+  color: #6c757d;
+  margin-bottom: 1.5em;
+}
+
+.password-input-group {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.password-input {
+  flex: 1;
+  padding: 0.75em;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-family: monospace;
+  text-align: center;
+  letter-spacing: normal;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.password-submit {
+  padding: 0.75em 1.5em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.password-submit:hover {
+  background-color: #0056b3;
+}
+
+.password-submit:active {
+  background-color: #004085;
+}
+
+.password-error {
+  color: #dc3545;
+  font-weight: 600;
+  margin-top: 0.5em;
+}
+
+.password-protected-content {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+
+</section>
+<section id="example-3-short-solution" class="level2">
+<h2 class="anchored" data-anchor-id="example-3-short-solution">Example 3: Short Solution</h2>
+<p><strong>Exercise:</strong> What is the capital of France?</p>
+<div class="password-protected-container" id="password-content-3">
+  <div class="password-prompt">
+    <div class="password-box">
+      <h4 class="anchored">🔒 Solution Locked</h4>
+      <div class="password-input-group">
+        <input type="text" id="password-content-3-input" class="password-input" placeholder="Enter 5-character password" maxlength="5" style="text-transform: uppercase;">
+        <button onclick="unlockContent_3()" class="password-submit">Unlock</button>
+      </div>
+      <div id="password-content-3-error" class="password-error" style="display: none;">
+        ❌ Incorrect password. Please try again.
+      </div>
+    </div>
+  </div>
+  <div id="password-content-3-content" class="password-protected-content" style="display: none;">
+    <!-- Content will be decrypted and inserted here -->
+  </div>
+</div>
+
+<script>
+(function() {
+  const encryptedData_3 = '7c7b0233646a0d6470022a3c332c2f3e6d720600373b3626337c7b0066721a6d7305322d3a2e2d267c7b04667369182031282a6d7200646b0e3166721c';
+  const passwordHash_3 = 'e721dab';
+  
+  function hashPassword(password) {
+    let hash = 5381;
+    for (let i = 0; i < password.length; i++) {
+      hash = ((hash * 33) + password.charCodeAt(i)) >>> 0;
+    }
+    return hash.toString(16);
+  }
+  
+  function xorDecrypt(hexStr, password) {
+    let decrypted = '';
+    const keyLen = password.length;
+    
+    for (let i = 0; i < hexStr.length; i += 2) {
+      const charCode = parseInt(hexStr.substr(i, 2), 16);
+      const keyCode = password.charCodeAt((i / 2) % keyLen);
+      decrypted += String.fromCharCode(charCode ^ keyCode);
+    }
+    
+    // URL decode to restore UTF-8 characters
+    return decodeURIComponent(decrypted);
+  }
+  
+  window.unlockContent_3 = function() {
+    const input = document.getElementById('password-content-3-input');
+    const password = input.value.toUpperCase().trim();
+    const errorDiv = document.getElementById('password-content-3-error');
+    
+    if (hashPassword(password) === passwordHash_3) {
+      // Decrypt and show content
+      const decrypted = xorDecrypt(encryptedData_3, password);
+      document.getElementById('password-content-3-content').innerHTML = decrypted;
+      document.getElementById('password-content-3-content').style.display = 'block';
+      document.querySelector('#password-content-3 .password-prompt').style.display = 'none';
+      errorDiv.style.display = 'none';
+      
+      // Store password for this session
+      sessionStorage.setItem('password-content-3-password', password);
+    } else {
+      errorDiv.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  };
+  
+  // Check if already unlocked in this session
+  const savedPassword = sessionStorage.getItem('password-content-3-password');
+  if (savedPassword && hashPassword(savedPassword) === passwordHash_3) {
+    const decrypted = xorDecrypt(encryptedData_3, savedPassword);
+    document.getElementById('password-content-3-content').innerHTML = decrypted;
+    document.getElementById('password-content-3-content').style.display = 'block';
+    document.querySelector('#password-content-3 .password-prompt').style.display = 'none';
+  }
+  
+  // Allow Enter key to submit
+  document.getElementById('password-content-3-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      unlockContent_3();
+    }
+  });
+})();
+</script>
+
+<style>
+.password-protected-container {
+  margin: 1.5em 0;
+}
+
+.password-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.password-box {
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 2em;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.password-box h4 {
+  margin-top: 0;
+  color: #495057;
+}
+
+.password-box p {
+  color: #6c757d;
+  margin-bottom: 1.5em;
+}
+
+.password-input-group {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.password-input {
+  flex: 1;
+  padding: 0.75em;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-family: monospace;
+  text-align: center;
+  letter-spacing: normal;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.password-submit {
+  padding: 0.75em 1.5em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.password-submit:hover {
+  background-color: #0056b3;
+}
+
+.password-submit:active {
+  background-color: #004085;
+}
+
+.password-error {
+  color: #dc3545;
+  font-weight: 600;
+  margin-top: 0.5em;
+}
+
+.password-protected-content {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+
+</section>
+<section id="how-to-use" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use">How to Use</h2>
+<section id="creating-password-protected-content" class="level3">
+<h3 class="anchored" data-anchor-id="creating-password-protected-content">Creating Password-Protected Content</h3>
+<p>Wrap your solution in a div with the <code>content-password</code> class and a unique <code>name</code> attribute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>:::{.content-password name="my-solution"}</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Your solution content here...</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>name</code> attribute: - Determines the password (same name = same password) - Keeps password stable even if content changes - Should be unique and descriptive (e.g., “exercise-1”, “sklearn-pipeline”) - If omitted, defaults to “solution-1”, “solution-2”, etc.</p>
+</section>
+<section id="for-students-include-solutions-false" class="level3">
+<h3 class="anchored" data-anchor-id="for-students-include-solutions-false">For Students (include-solutions: false)</h3>
+<ol type="1">
+<li>Try to solve the exercise yourself</li>
+<li>When instructor shares the password, enter it in the password field</li>
+<li>Click “Unlock” or press Enter</li>
+<li>Solution will be revealed and remain visible during your session</li>
+</ol>
+</section>
+<section id="for-instructors-include-solutions-true" class="level3">
+<h3 class="anchored" data-anchor-id="for-instructors-include-solutions-true">For Instructors (include-solutions: true)</h3>
+<ol type="1">
+<li>Render with <code>include-solutions: true</code> in YAML</li>
+<li>Collapsible blue boxes will show passwords for each solution (click to reveal)</li>
+<li>The solution name is displayed in the header</li>
+<li>Share passwords with students progressively during class</li>
+<li>Students can unlock solutions at their own pace</li>
+</ol>
+</section>
+</section>
+<section id="security" class="level2">
+<h2 class="anchored" data-anchor-id="security">Security</h2>
+<p><strong>Password Protection:</strong> Passwords are NOT stored in the HTML source code. Only a one-way hash is included, making it impossible to extract the password by viewing the page source. The content is encrypted with the password, and can only be decrypted by entering the correct password.</p>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<p>To test this example:</p>
+<p><strong>Student view:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render example.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Instructor view:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render example.qmd <span class="at">-M</span> include-solutions:true</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or change the YAML front matter <code>include-solutions: false</code> to <code>include-solutions: true</code>.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

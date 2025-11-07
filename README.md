@@ -1,6 +1,6 @@
 # Password-Protected Content Extension For Quarto
 
-A Quarto extension that allows you to password-protect content in HTML documents, perfect for progressively revealing solutions during lectures or workshops.
+A Quarto extension that allows you to password-protect content in HTML documents, perfect for progressively revealing solutions during lectures or workshops. The encryption is not secure and hence suitable for educational use only, not sensitive data.
 
 ## Installation
 
@@ -69,7 +69,7 @@ This solution demonstrates...
 ## Features
 
 - **Encryption**: Passwords not stored in HTML source (only hash); content encrypted with XOR cipher
-- **Security**: Suitable for educational use, not sensitive data
+- **Security**: Suitable for educational use only, not sensitive data
 - **Stable passwords**: Based on solution name, not content (won't change when you edit)
 - **Deterministic**: Same name always generates same password
 - **Session persistence**: Once unlocked, stays unlocked during browser session
@@ -96,6 +96,11 @@ This solution demonstrates...
 ## Example
 
 Here is the source code for a minimal example: [example.qmd](example.qmd).
+
+**See it in action:**
+
+- [Student view](https://htmlpreview.github.io/?https://github.com/pcerf/quarto-password-content/blob/main/example.html) - Solutions are password-protected
+- [Instructor view](https://htmlpreview.github.io/?https://github.com/pcerf/quarto-password-content/blob/main/example-instructor.html) - Shows passwords for each solution
 
 ## Use Cases
 
