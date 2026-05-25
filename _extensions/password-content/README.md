@@ -1,6 +1,6 @@
 # Password-Protected Content Extension
 
-A Quarto extension that allows you to password-protect content in HTML documents.
+A Quarto extension to show or hide content based on `include-solutions`, with optional password protection in HTML output.
 
 ## Installation
 
@@ -10,27 +10,28 @@ quarto add pcerf/quarto-password-content
 
 ## Usage
 
-Add the filter to your document's YAML header:
-
 ```yaml
 ---
-title: "My Lecture"
-include-solutions: false  # Set to true to show passwords
+include-solutions: false        # true = show solutions/passwords
+include-solutions-override: …  # optional: overrides include-solutions
 filters:
   - password-content
 ---
 ```
 
-Wrap content you want to protect:
+| `name` attribute | HTML (student)                      | HTML (instructor)   | Non-HTML (student) | Non-HTML (instructor) |
+|------------------|-------------------------------------|---------------------|--------------------|-----------------------|
+| any name         | password prompt + encrypted content | content + password box | absent          | content               |
+| `nopass`         | absent                              | content             | absent             | content               |
 
 ```markdown
-:::{.content-password name="my-solution"}
-## Solution
+:::{.content-password name="exercise-1"}
+Solution content here…
+:::
 
-Your solution content here...
+:::{.content-password name="nopass"}
+Content shown only in instructor view, absent elsewhere.
 :::
 ```
 
-## Documentation
-
-For full documentation, examples, and usage instructions, see the [main repository README](https://github.com/pcerf/quarto-password-content).
+Full documentation: [github.com/pcerf/quarto-password-content](https://github.com/pcerf/quarto-password-content)

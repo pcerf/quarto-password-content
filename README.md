@@ -26,7 +26,7 @@ Add the filter to your document's YAML header:
 ```yaml
 ---
 title: "My Lecture"
-include-solutions: false  # Set to true to show passwords
+include-solutions: false  # Set to true to show solutions/passwords
 filters:
   - password-content
 ---
@@ -59,19 +59,52 @@ This solution demonstrates...
 - Should be unique and descriptive (e.g., "exercise-1", "sklearn-pipeline")
 - If omitted, defaults to "solution-1", "solution-2", etc.
 
-### Behavior
+### Unprotected Toggle: `name="nopass"`
 
-**When `include-solutions: false` (student view):**
-- Content is encrypted and hidden
-- A password input field is displayed
-- Students must enter the correct 5-character password to reveal
-- Password is automatically generated from the solution's `name` attribute
+Use `name="nopass"` for content that should be shown or hidden based solely on `include-solutions`, with **no password mechanism at all**:
 
-**When `include-solutions: true` (instructor view):**
+```markdown
+:::{.content-password name="nopass"}
+This content is shown to instructors and completely absent from the student document.
+:::
+```
+
+- When `include-solutions: false` — the content is **not present in the output at all** (not encrypted, not hidden with CSS, simply not rendered).
+- When `include-solutions: true` — the content is rendered as-is with no password box.
+
+### Behavior by Format
+
+The password UI (input field, encryption, password info box) is only generated for HTML-compatible output formats (html, revealjs, epub, …).
+
+**HTML output — `include-solutions: false` (student view):**
+- Content is encrypted and hidden behind a password input field
+- The encrypted data and password hash are embedded in the page; the plaintext is not
+
+**HTML output — `include-solutions: true` (instructor view):**
 - Content is visible
-- A collapsible blue info box shows the solution name and password
-- Click to reveal the password
-- Share passwords with students during class to unlock solutions
+- A collapsible blue info box shows the password for each solution
+- Share passwords with students during class to unlock solutions progressively
+
+**Non-HTML output (PDF, docx, …) — `include-solutions: false`:**
+- The block is completely absent from the output (no encrypted data, no placeholder)
+
+**Non-HTML output (PDF, docx, …) — `include-solutions: true`:**
+- Content is rendered natively with no password UI or password shown
+
+### Overriding `include-solutions` at Render Time
+
+Use `include-solutions-override` to override the document's `include-solutions` value without editing the file. This takes precedence over `include-solutions` when present:
+
+```bash
+quarto render lecture.qmd -M include-solutions-override:true
+```
+
+Or set it in the YAML front matter:
+
+```yaml
+include-solutions: false
+include-solutions-override: true  # wins
+```
 
 ## Features
 
@@ -82,7 +115,8 @@ This solution demonstrates...
 - **Session persistence**: Once unlocked, stays unlocked during browser session
 - **Clean UI**: Professional password entry interface with collapsible password boxes
 - **Keyboard support**: Press Enter to submit password
-
+- **Format-aware**: Password/encryption data only emitted for HTML-compatible formats
+- **Unprotected toggle**: `name="nopass"` for content that needs no password, just show/hide
 
 ## Example Workflow
 
@@ -117,3 +151,21 @@ The password-protected content extension is particularly useful for:
 - **Storage**: Encrypted content embedded in HTML as hex string
 - **Decryption**: Client-side JavaScript when correct password entered
 - **Password format**: 5 characters (uppercase letters and numbers, excluding similar-looking characters)
+- **Non-HTML formats**: Encrypted data and passwords are never written; content is either shown natively or omitted entirely
+
+## Changelog
+
+### v1.1.0
+
+- **`name="nopass"`** — new option for content that should be shown or hidden based solely on `include-solutions`, with no password mechanism. When hidden the content is entirely absent from the output (not encrypted, not CSS-hidden).
+- **`include-solutions-override`** — new metadata key that overrides `include-solutions` when present, useful for command-line rendering without editing the document.
+- **Format-aware output** — encrypted data, password hashes, and the password UI are only emitted for HTML-compatible formats (html, revealjs, epub, …). In non-HTML formats (PDF, docx, …), protected content is either rendered natively (instructor view) or completely omitted (student view).
+
+### v1.0.0
+
+- Initial release
+- Password-protected content via `.content-password` divs
+- Password derived from `name` attribute (stable across content edits)
+- XOR encryption with client-side decryption
+- Session persistence (stays unlocked during browser session)
+- Collapsible password info box in instructor view

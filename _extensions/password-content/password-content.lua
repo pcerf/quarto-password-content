@@ -6,16 +6,22 @@ local include_solutions = false
 
 -- Capture metadata early
 function Meta(meta)
-  if meta["include-solutions"] then
-    local value = meta["include-solutions"]
+  local function parse_bool(value)
     if type(value) == "boolean" then
-      include_solutions = value
+      return value
     elseif type(value) == "table" and value.t == "MetaBool" then
-      include_solutions = value.boolean or value.bool or false
+      return value.boolean or value.bool or false
     else
       local str_value = pandoc.utils.stringify(value)
-      include_solutions = (str_value == "true" or str_value == "True")
+      return (str_value == "true" or str_value == "True")
     end
+  end
+
+  -- include-solutions-override takes precedence over include-solutions
+  if meta["include-solutions-override"] ~= nil then
+    include_solutions = parse_bool(meta["include-solutions-override"])
+  elseif meta["include-solutions"] ~= nil then
+    include_solutions = parse_bool(meta["include-solutions"])
   end
   return meta
 end
@@ -120,17 +126,46 @@ function encrypt_content(content_str, password)
   return table.concat(encrypted)
 end
 
+-- HTML and HTML-compatible formats (revealjs, epub, …) support the full password UI.
+local function is_html_format()
+  return FORMAT == "html" or FORMAT == "html4" or FORMAT == "html5" or
+         FORMAT == "revealjs" or FORMAT == "slidy" or FORMAT == "slideous" or
+         FORMAT == "dzslides" or FORMAT == "s5" or
+         FORMAT == "epub" or FORMAT == "epub2" or FORMAT == "epub3"
+end
+
 function Div(el)
   -- Check if this is a password-protected div
   if el.classes:includes("content-password") then
     counter = counter + 1
     local div_id = "password-content-" .. counter
-    
+
     -- Use the captured metadata value
     local show_solutions = include_solutions
-    
+
     -- Get password name from div attributes, or use counter as fallback
     local password_name = el.attributes["name"] or ("solution-" .. counter)
+
+    -- nopass: content is either rendered as-is or dropped entirely at render time.
+    -- When hidden, the content is never written to the output (not even encrypted).
+    if password_name == "nopass" then
+      if show_solutions then
+        return el.content
+      else
+        return {}
+      end
+    end
+
+    -- Non-HTML formats: render content natively (no password UI) or omit entirely.
+    -- Encrypted data and password hashes are never written to non-HTML outputs.
+    if not is_html_format() then
+      if show_solutions then
+        return el.content
+      else
+        return {}
+      end
+    end
+
     local password = generate_password(password_name)
     
     -- Render content to HTML string
